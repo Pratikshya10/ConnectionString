@@ -18,25 +18,28 @@ namespace ConnectionString.Controllers
         }
 
         // GET: Home/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            //create view and filter single user and pass that value to view
+            var singleUser = obj.GetStudentsDetails().Find(obj => obj.StuId == id);
+            return View(singleUser);
         }
 
         // GET: Home/Create
         public ActionResult Create()
         {
+            //create view here
             return View();
         }
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FormCollection collection, Student data)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                obj.CreateUser(data);
                 return RedirectToAction("Index");
             }
             catch
@@ -68,19 +71,20 @@ namespace ConnectionString.Controllers
         }
 
         // GET: Home/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            var singleUser = obj.GetStudentsDetails().Find(obj => obj.StuId == id);
+            return View(singleUser);
         }
 
         // POST: Home/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                obj.DeleteUser(id);
                 return RedirectToAction("Index");
             }
             catch

@@ -15,7 +15,7 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table" border="1">
+    <table class="table" border="1" borderColor="red" >
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.StuId)
@@ -48,8 +48,8 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Details", "Details", new { id=item.StuId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.StuId })
             </td>
         </tr>
     }

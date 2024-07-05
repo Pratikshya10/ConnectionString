@@ -15,7 +15,7 @@ namespace ConnectionString.Models
         public string Course { get; set; }
         public string Duration { get; set; }
 
-        public SqlConnection connection()
+        public SqlConnection Connection()
         {
             var connectionstring = ConfigurationManager.ConnectionStrings["nareshitconnection"].ConnectionString;
             SqlConnection con = new SqlConnection(connectionstring);
@@ -23,7 +23,7 @@ namespace ConnectionString.Models
         }
         public List<Student> GetStudentsDetails() 
         {
-            var con = connection();
+            var con = Connection();
             List<Student>StudList = new List<Student>();
             var query = "select * from StudentInfo";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -43,5 +43,26 @@ namespace ConnectionString.Models
             }
             return StudList;
         }
+    
+        public void CreateUser(Student obj)
+        {
+            var con = Connection();
+            con.Open();
+            string query = "insert into StudentInfo value('" + obj.StuId + "','" + obj.Name + "','" + obj.Course + "','" + obj.Duration + "')";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+    
+        public void DeleteUser(string id)
+        {
+            var con = Connection();
+            con.Open();
+            string query = "Delete from StudentInfo where StuId=" + StuId;
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
     }
+
 }
